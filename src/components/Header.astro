@@ -1,10 +1,23 @@
 ---
 ---
 
-<nav>
-    <a href="/">Accueil</a>
-    <a href="/offres">Offres</a>
-</nav>
+<div class="bg-yellow-100 header  m-8 px-10 py-5 rounded-full flex justify-between ">
+    <div class="header__left">
+        <nav class="text-purple-400 py-2 gap-12 flex">
+        <a class="uppercase hover:text-purple-800" href="/">Accueil</a>
+        <a class="uppercase hover:text-purple-800" href="/offres">Offres</a>
+        <a class="uppercase hover:text-purple-800" href="/article">Article</a>
+    </nav>
+    </div>
+    <div>
+        <input type="text" placeholder="Rechercher..." class="px-4 py-2 rounded-full border-2 text-purple-400 border-purple-400 bg-yellow-100 focus:outline-none focus:ring-2">
+    </div>
+    <div class="header__right text-purple-400 gap-12 flex">
+        <button class="hover:text-purple-800">Connexion</button>
+        <button class="bg-purple-400 px-5 hover:bg-purple-800 text-white rounded-full">Inscription</button>
+    </div>
+</div>
+    
 
 <style>
 </style>
