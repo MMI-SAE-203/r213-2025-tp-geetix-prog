@@ -44,18 +44,17 @@ const offres = [
         <h1 class="font-bold uppercase text-purple-400">Nos offres</h1>
     </div>
     <div x-data="{ showFavorites: false }">
-        <div class="flex columns-3 justify-between mt-20 mx-52">
-            <div x-show="showFavorites">
-                {offres.map((item) => <Cards {...item} />)}
-            </div>
-            <div x-show="!showFavorites">
-                {offres.map((item) => item.favori && <Cards {...item} />)}
-            </div>
-        </div>
         <button @click="showFavorites = !showFavorites">
             <span x-show="!showFavorites">Afficher les favoris</span>
             <span x-show="showFavorites">Afficher tout</span>    
         </button>
+    
+        <div x-show="showFavorites">
+            {offres.map((item) => <Cards {...item} />)}
+        </div>
+        <div x-show="!showFavorites">
+            {offres.map((item) => item.favori && <Cards {...item} />)}
+        </div>
     </div>
 
 </Layout>
