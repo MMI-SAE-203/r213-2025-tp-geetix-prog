@@ -1,0 +1,15 @@
+---
+const {...item}=Astro.props
+
+---
+
+<div class="card border w-80 h-80 shadow-black border-radius rounded-xl bg-slate-200 px-5 py-5">
+    <h2 class="font-bold text-lg mb-6">{item.nomMaison}</h2>
+    <p class="mb-2">Adresse : {item.adresse}</p>
+    <p class="mb-2">Surface : {item.surface} m²</p>
+    <p class="mb-2">Nombre de salles de bains : {item.nbSdb}</p>
+    <p class="mb-2">Nombre de chambres : {item.nbChambres}</p>
+    <p class="mb-5">Prix : {item.prix} €</p>
+    <p>Favori : <span class={item.favori ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>{item.favori ? 'Oui' : 'Non'}</span></p>
+</div>
+

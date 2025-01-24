@@ -1,4 +1,6 @@
 ---
+import type { ACTION_ERROR_CODES } from 'astro:actions';
+import Cards from '../components/Cards.astro';
 import Layout from '../layouts/Base.astro';
 const offres = [
     {
@@ -35,25 +37,25 @@ const offres = [
         "imgUrl": "image3.png"
     }
 ]
-
 ---
 
 <Layout titre="offres">
     <div class="flex justify-center text-4xl mt-10">
         <h1 class="font-bold uppercase text-purple-400">Nos offres</h1>
     </div>
-    <div class="flex columns-3 justify-between mt-20 mx-52">
-        { offres.map((item) => 
-                <div class="card border w-80 h-80 shadow-black border-radius rounded-xl bg-slate-200 px-5 py-5">
-                    <h2 class="font-bold text-lg mb-6">{item.nomMaison}</h2>
-                    <p class="mb-2">Adresse : {item.adresse}</p>
-                    <p class="mb-2">Surface : {item.surface} m²</p>
-                    <p class="mb-2">Nombre de salles de bains : {item.nbSdb}</p>
-                    <p class="mb-2">Nombre de chambres : {item.nbChambres}</p>
-                    <p class="mb-5">Prix : {item.prix} €</p>
-                    <p>Favori : <span class={item.favori ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>{item.favori ? 'Oui' : 'Non'}</span></p>
-                </div>
-            )
-        }
+    <div x-data="{ showFavorites: false }">
+        <div class="flex columns-3 justify-between mt-20 mx-52">
+            <div x-show="showFavorites">
+                {offres.map((item) => <Cards {...item} />)}
+            </div>
+            <div x-show="!showFavorites">
+                {offres.map((item) => item.favori && <Cards {...item} />)}
+            </div>
+        </div>
+        <button @click="showFavorites = !showFavorites">
+            <span x-show="!showFavorites">Afficher les favoris</span>
+            <span x-show="showFavorites">Afficher tout</span>    
+        </button>
     </div>
+
 </Layout>
