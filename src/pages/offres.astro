@@ -10,20 +10,33 @@ const offres = await getOffres();
     <div class="flex justify-center text-4xl mt-10">
         <h1 class="font-bold uppercase text-purple-400">Nos offres</h1>
     </div>
-    <div x-data="{ showFavorites: false }">
+    <div x-data="{ showFavorites: false, viewMode: 'grid' }">
     
-        <div x-show="showFavorites" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-10 mt-10">
+        <div x-show="showFavorites && viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-10 mt-10">
             {offres.map((item) => <Cards {...item} />)}
         </div>
-        <div x-show="!showFavorites" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-10 mt-10">
+        <div x-show="!showFavorites && viewMode === 'grid'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-10 mt-10">
             {offres.map((item) => item.favori && <Cards {...item} />)}
+        </div>
+        <div x-show="showFavorites && viewMode === 'list'" class="list mx-10 mt-10">
+            {offres.map((item) => <Cards {...item} class="list-item" />)}
+        </div>
+        <div x-show="!showFavorites && viewMode === 'list'" class="list mx-10 mt-10">
+            {offres.map((item) => item.favori && <Cards {...item} class="list-item" />)}
         </div>
         <div class="flex justify-center">
             <button @click="showFavorites = !showFavorites" class="mb-4 p-2 bg-purple-400 text-white rounded mt-5">
-            <span x-show="!showFavorites">Afficher les favoris</span>
-            <span x-show="showFavorites">Afficher tout</span>    
-            </button> 
-        </button>
+                <span x-show="!showFavorites">Afficher les favoris</span>
+                <span x-show="showFavorites">Afficher tout</span>    
+            </button>
+        </div>
+        <div class="flex justify-center">
+            <button @click="viewMode = 'grid'" class="mb-4 p-2 bg-red-900 text-white rounded mt-5 ml-2">
+                Afficher en grille
+            </button>
+            <button @click="viewMode = 'list'" class="mb-4 p-2 bg-orange-500 text-white rounded mt-5 ml-2">
+                Afficher en liste
+            </button>
+        </div>
     </div>
-
 </Layout>
