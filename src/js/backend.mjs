@@ -40,7 +40,7 @@ export async function getOffresBySurface(s) {
     return maisonSurface;
 }
 
-export async function getOffresByPrice(s) {
+export async function getOffresByPrice(minPrice, maxPrice) {
     const maisonPrice = await pb.collection('Maison').getFullList({
         filter: `prix > ${minPrice} && prix < ${maxPrice}`,
     });
