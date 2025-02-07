@@ -3,14 +3,17 @@ const {...item}=Astro.props
 
 ---
 
-<div class="card border w-80 shadow-black border-radius rounded-xl bg-slate-200 px-5 py-5">
+<div class="card border border-2 border-purple-400 w-80 shadow-black border-radius rounded-xl bg-slate-50 px-5 py-5">
     <img src={item.img} alt={item.imgAlt} class="w-64 h-64 object-cover" />
     <h2 class="font-bold text-lg mb-6">{item.nomMaison}</h2>
     <p class="mb-2">Adresse : {item.adresse}</p>
     <p class="mb-2">Surface : {item.surface} m²</p>
-    <p class="mb-2">Nombre de salles de bains : {item.nbSdb}</p>
-    <p class="mb-2">Nombre de chambres : {item.nbChambres}</p>
+    <p class="mb-2">Nombre de salles de bains : {item.nbrSdb}</p>
+    <p class="mb-2">Nombre de chambres : {item.nbrChambres}</p>
     <p class="mb-5">Prix : {item.prix} €</p>
     <p>Favori : <span class={item.favori ? 'text-green-500 font-bold' : 'text-red-500 font-bold'}>{item.favori ? 'Oui' : 'Non'}</span></p>
+    <div class="flex justify-end">
+        <a href={`/offre/${item.id}`} class="text-purple-400">Voir plus →</a>
+    </div>
 </div>
 
