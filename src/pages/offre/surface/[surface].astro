@@ -1,0 +1,23 @@
+---
+import { getOffresBySurface } from "../../../js/backend.mjs";
+import Cards from "../../../components/Cards.astro";
+import Layout from '../../../layouts/Layout.astro';
+const { surface } = Astro.params;
+
+const offres = await getOffresBySurface(surface);
+console.log(offres);
+
+---
+
+<Layout>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-10 mt-10">
+        {
+            offres.map((offre) => <Cards {...offre} />)
+        }
+    </div>
+    <div class="flex justify-center">
+        <button class="button bg-purple-400 hover:bg-purple-500 text-white font-bold py-2 px-4 rounded" onclick="history.back()">Retour aux offres</button>
+    </div>
+    
+
+</Layout>
