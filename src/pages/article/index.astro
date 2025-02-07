@@ -1,0 +1,14 @@
+---
+//@ts-nocheck
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Cards.astro";
+import { getOffres } from "../../js/backend.mjs";
+
+const events = await getOffres(); // Retourne une liste d'événements en ejoutant un champ "img" contenant le URL complet de l'image associée à l'événement.
+---
+
+<Layout>
+    <div class="flex justify-center text-4xl mt-10">
+		<h1 class="font-bold uppercase text-purple-400">ARTICLES</h1>
+	</div>    
+</Layout>
