@@ -1,16 +1,46 @@
 ---
-import Layout from "../../layouts/Layout.astro"
+import Layout from "../../layouts/Layout.astro";
+import { addOffre } from "../../js/backend.mjs";
+let message = '';
+if (Astro.request.method === "POST") {
+    const formData = await Astro.request.formData();
+    const response = await addOffre(formData);
+    message = response.message;
+}
 ---
-
 <Layout>
-    <h1 class="text-lg">Ajouter une offre</h1>
-    <form action="/offres/add" method="POST" enctype="multipart/form-data">
-        <input type="text" name="nomMaison" placeholder="Nom de la maison" required class="w-full mt-2 p-2 border border-gray-300 rounded-md" />
-        <input type="number" name="prix" placeholder="Prix" class="w-full mt-2 p-2 border border-gray-300 rounded-md" />
-        <input type="number" name="nbSdb" placeholder="Nombre de salles de bain" class="w-full mt-2 p-2 border border-gray-300 rounded-md" />
-        <input type="number" name="nbChambres" placeholder="Nombre de chambres" class="w-full mt-2 p-2 border border-gray-300 rounded-md" />
-        <input type="number" name="surface" placeholder="Superficie" class="w-full mt-2 p-2 border border-gray-300 rounded-md" />
-        <input type="file" name="image" class="w-full mt-2 p-2 border border-gray-300 rounded-md" />
-        <button type="submit" class="w-full mt-4 p-2 bg-blue-500 text-white rounded-md">Ajouter</button>
-    </form>
+    <div class="flex flex-col items-center justify-center container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Ajouter une offre</h1>
+        <form action="/offre/add" method="POST" enctype="multipart/form-data" class="w-full max-w-lg bg-white p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label for="nomMaison" class="block text-gray-700 font-bold mb-2">Nom de la maison</label>
+                <input type="text" id="nomMaison" name="nomMaison" placeholder="Nom de la maison" required class="w-full p-2 border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="prix" class="block text-gray-700 font-bold mb-2">Prix</label>
+                <input type="number" id="prix" name="prix" placeholder="Prix" class="w-full p-2 border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="nbrSdb" class="block text-gray-700 font-bold mb-2">Nombre de salles de bain</label>
+                <input type="number" id="nbrSdb" name="nbrSdb" placeholder="Nombre de salles de bain" class="w-full p-2 border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="nbrChambres" class="block text-gray-700 font-bold mb-2">Nombre de chambres</label>
+                <input type="number" id="nbrChambres" name="nbrChambres" placeholder="Nombre de chambres" class="w-full p-2 border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="surface" class="block text-gray-700 font-bold mb-2">Superficie</label>
+                <input type="number" id="surface" name="surface" placeholder="Superficie" class="w-full p-2 border border-gray-300 rounded-md" />
+            </div>
+            <div class="mb-4">
+                <label for="image" class="block text-gray-700 font-bold mb-2">Image</label>
+                <input type="file" id="image" name="image" class="w-full p-2 border border-gray-300 rounded-md" />
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ajouter</button>
+            </div>
+        </form>
+        <p class="mt-4 text-red-500">{message}</p>
+    </div>
+    
 </Layout>
